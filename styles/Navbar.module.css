@@ -1,0 +1,17 @@
+.navbar{
+  display: flex;
+  max-width: 100%;
+  flex: 8;
+  list-style: none;
+  padding: 0.5em;
+  justify-content:space-between;
+  margin-bottom: 1em;
+}
+
+.options{
+
+  color: rgb(242, 77, 77);
+  font-size: 1.3em;
+  font-weight: 500;
+
+}
