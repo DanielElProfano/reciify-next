@@ -1,39 +1,30 @@
+/* eslint-disable react/prop-types */
 import Button from '../Button'
-import { useState } from 'react'
 
-const INITIAL_STATE = {
-  email: '',
-  password: ''
-}
-export default function UserForm(props) {
-  console.log(props)
-  const [form, setForm] = useState(INITIAL_STATE)
+export default function UserForm({ email, setEmail, submit, setSubmit, password, setPassword }) {
+  console.log(email, setEmail, submit, password)
 
   function submitForm(event) {
     event.preventDefault()
-    props.form(form)
+    setSubmit(true)
   }
-  function handlerForm(event) {
-    const { value, name } = event.target
-    setForm({ ...form, [name]: value })
-  }
-  return (
 
+  return (
     <form onSubmit={submitForm}>
       <label>User: </label>
       <input
         className="b-input"
         name="email"
-        value={form.email}
+        value={email}
         type="text"
-        onChange={handlerForm} />
+        onChange={(e) => setEmail(e.target.value)} />
       <label>Password: </label>
       <input
         className="b-input"
         name="password"
-        value={form.password}
+        value={password}
         type="password"
-        onChange={handlerForm} />
+        onChange={(e) => setPassword(e.target.value)} />
       <Button onClick={submitForm}>Login</Button>
     </form>
   )

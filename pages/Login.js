@@ -1,29 +1,44 @@
-import { useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useRouter } from 'next/router'
 
 import UserForm from '../componentes/AppLayout/UserForm'
-import { loginService } from '../services/userServices'
+import GlobalContext from '../context/GlobalContext'
+// import { loginService } from '../services/userServices'
 
 import styles from '../styles/Login.module.css'
-import { setLocalStore } from '../storage'
+import { setSessionStore } from '../utils'
+import { checkSession } from '../services/checkSession'
 
 export default function Login() {
   const router = useRouter()
-  const [user, setUser] = useState(false)
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [submit] = useState(false)
 
-  const userLogin = async () => {
+  const { loginUser } = useContext(GlobalContext)
+
+  useEffect(() => {
+    const getSession = async () => {
+      const session = await checkSession()
+      console.log("ses", session)
+      if (session === 'sessión abierta') {
+        router.push('/Wall')
+      }
+    }
+    getSession()
+
+  }, [])
+
+  const onSubmit = async () => {
     const email = 'arriba@abajo.com'
     const password = 'arriba'
-    const response = await loginService({ email, password })
-    const { error, body } = response
+    const response = await loginUser(email, password)
+    const { error } = response
     if (!error) {
-      setUser(true)
-      setLocalStore('userr', response)
-      // sessionStorage.setItem('user', JSON.stringify(response))
-
       router.push('/Wall')
     }
   }
+
 
   return (
     <>
@@ -31,7 +46,13 @@ export default function Login() {
         <img src='/vercel.svg' alt='logo' />
         <h2 className={styles.title}>Welcome to Recify</h2>
       </div>
-      <UserForm form={userLogin} />
+      <UserForm
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        submit={submit}
+        setSubmit={onSubmit} />
     </>
 
   )

@@ -52,6 +52,5 @@ export const seed = [
         comment: 'comentario del user 2 sobre el post del user 2'
       }
     ]
-
   }
 ]
