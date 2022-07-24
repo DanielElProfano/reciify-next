@@ -2,7 +2,6 @@ import { LOGIN_USER, GET_USER, GET_TOKEN } from "./types";
 
 export default (state, action) => {
   const { type, payload } = action
-  console.log("REDUCER DATA: ", state, payload)
   switch (type) {
     case LOGIN_USER:
       console.log('login reducer')

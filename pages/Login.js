@@ -17,18 +17,6 @@ export default function Login() {
 
   const { loginUser } = useContext(GlobalContext)
 
-  useEffect(() => {
-    const getSession = async () => {
-      const session = await checkSession()
-      console.log("ses", session)
-      if (session === 'sessión abierta') {
-        router.push('/Wall')
-      }
-    }
-    getSession()
-
-  }, [])
-
   const onSubmit = async () => {
     const email = 'arriba@abajo.com'
     const password = 'arriba'
@@ -38,7 +26,6 @@ export default function Login() {
       router.push('/Wall')
     }
   }
-
 
   return (
     <>

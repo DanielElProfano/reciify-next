@@ -4,7 +4,6 @@ import GlobalContext from "./GlobalContext"
 import GlobalReducer from "./GlobalReducer"
 
 const GlobalState = ({ children }) => {
-  console.log(children)
   const initialState = {
     error: null,
     status: null,
@@ -22,10 +21,6 @@ const GlobalState = ({ children }) => {
     return data
   }
   const getToken = () => {
-    dispatch({
-      type: 'GET_TOKEN',
-      payload: ''
-    })
     return state
   }
 
